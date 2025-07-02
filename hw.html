@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summer Movie Guide</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffbe7;
+      --accent: #ff9800;
+      --text: #222;
+      --card-bg: #fff;
+      --nav-bg: #fff8e1;
+      --nav-link: #ff9800;
+      --nav-link-hover: #e65100;
+      --shadow: 0 4px 12px rgba(255, 152, 0, 0.08);
+      --summer-blue: #4fc3f7;
+      --popcorn: #fffde7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0;
+      padding-top: 80px; /* Add padding for fixed navigation */
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 248, 225, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+      border-bottom: 1px solid #ffcc80;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--nav-link);
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--nav-link-hover);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--nav-link);
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      letter-spacing: 1px;
+    }
+    nav a:hover {
+      color: var(--nav-link-hover);
+    }
+    header {
+      text-align: center;
+      padding-bottom: 2rem;
+      background: linear-gradient(90deg, #fff8e1 0%, #b3e5fc 100%);
+      padding-top: 2rem;
+    }
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent);
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+    header h1 {
+      font-size: 2.7rem;
+      color: var(--accent);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #555;
+    }
+    .about {
+      max-width: 700px;
+      margin: 2rem auto 2.5rem auto;
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 2;
+    }
+    .about-img {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    .about-img img {
+      width: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      background: #fff;
+    }
+    .grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+      width: 320px;
+      min-width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card h2 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .card p { font-size: 1rem; text-align: center; }
+    .card img {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+    /* CSS Benefits Section */
+    .css-benefits {
+      max-width: 900px;
+      margin: 3rem auto;
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+    .css-benefits h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .css-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      justify-content: space-between;
+    }
+    .css-example {
+      flex: 1 1 250px;
+      min-width: 250px;
+      background: #fffde7;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(255, 152, 0, 0.07);
+      margin-bottom: 1rem;
+    }
+    .float-demo {
+      overflow: auto;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: var(--popcorn);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+    .float-box {
+      float: left;
+      width: 60px;
+      height: 60px;
+      background: var(--accent);
+      color: #fff;
+      text-align: center;
+      line-height: 60px;
+      margin-right: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 2rem;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046857.png');
+      background-size: 40px 40px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .float-text {
+      overflow: hidden;
+      font-size: 0.98rem;
+      color: #444;
+      padding-top: 0.5rem;
+    }
+    .flex-demo {
+      display: flex;
+      gap: 10px;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: var(--summer-blue);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+    .flex-item {
+      background: #fff;
+      color: var(--accent);
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      flex: 1 1 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(33,150,243,0.07);
+      font-size: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flex-item span {
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
+    }
+    .boxmodel-demo {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .boxmodel-box {
+      background: #fffde7;
+      border: 4px solid var(--accent);
+      padding: 20px;
+      margin: 10px;
+      width: 120px;
+      height: 60px;
+      box-sizing: border-box;
+      position: relative;
+      text-align: center;
+      line-height: 60px;
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    .boxmodel-label {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, 10px);
+      font-size: 0.85rem;
+      color: #555;
+    }
+    @media (max-width: 800px) {
+      .about, .css-benefits { padding: 1rem; }
+      .grid { flex-direction: column; align-items: center; }
+      .css-examples { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">SUMMER MOVIES</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#top-picks">Top Picks</a></li>
+        <li><a href="#watchlist">Watchlist</a></li>
+        <li><a href="#floats">Floats</a></li>
+        <li><a href="#flexbox">Flexbox</a></li>
+        <li><a href="#box-model">Box Model</a></li>
+      </ul>
+    </div>
+  </nav>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Movie Camera Icon" class="profile-img" />
+    <h1>Summer Movie Guide</h1>
+    <p>Your ticket to the best summer flicks, CSS magic, and movie fun!</p>
+  </header>
+  <section class="about" id="about">
+    <div class="about-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Popcorn Icon" />
+    </div>
+    <div class="about-text">
+      <h2>About</h2>
+      <p>Nothing says summer like a great movie night! Whether you're at the drive-in, on the couch, or under the stars, these films bring the fun, adventure, and nostalgia of summer to life. Grab your popcorn and let's dive in!</p>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card" id="top-picks">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Shark Icon" />
+      <h2>Jaws (1975)</h2>
+      <p>The ultimate summer thriller! Spielberg's classic about a great white shark terrorizing a beach town is a must-watch for suspense and sun-soaked chills.</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" alt="Baseball Icon" />
+      <h2>The Sandlot (1993)</h2>
+      <p>Baseball, friendship, and endless summer days. This coming-of-age comedy is pure nostalgia and perfect for a feel-good movie night.</p>
+    </div>
+    <div class="card" id="watchlist">
+      <img src="https://cdn-icons-png.flaticon.com/512/197/197564.png" alt="Greek Island Icon" />
+      <h2>Mamma Mia! (2008)</h2>
+      <p>Set on a sun-drenched Greek island, this musical is packed with ABBA hits, romance, and summer vibes. Don't forget to sing along!</p>
+    </div>
+  </section>
+
+
+  <!-- <section class="css-benefits" id="floats">
+    <h2>CSS Magic: Floats</h2>
+    <p>Floats let you wrap text around images or boxes—perfect for classic layouts and fun effects!</p>
+    <div class="css-example">
+      <h3>Floats: Popcorn Box</h3>
+      <div class="float-demo">
+        <div class="float-box">A</div>
+        <div class="float-text">This box uses <b>float: left</b> to let text wrap around it. Floats are great for simple layouts and image placement.</div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="css-benefits" id="flexbox">
+    <h2>CSS Magic: Flexbox</h2>
+    <p>Flexbox makes it easy to align, distribute, and order elements responsively—like lining up movie tickets!</p>
+    <div class="css-example">
+      <h3>Flexbox: Movie Tickets</h3>
+      <div class="flex-demo">
+        <div class="flex-item"><span>🎟️</span> Admit One</div>
+        <div class="flex-item"><span>🎟️</span> VIP</div>
+        <div class="flex-item"><span>🎟️</span> Balcony</div>
+      </div>
+      <div style="font-size:0.98rem;color:#444;">Flexbox makes it easy to line up your movie tickets (or anything else) responsively!</div>
+    </div>
+  </section>
+
+
+
+
+  <section class="css-benefits" id="box-model">
+    <h2>CSS Magic: The Box Model</h2>
+    <p>The box model is fundamental: every element is a box with content, padding, border, and margin—like a movie screen!</p>
+    <div class="css-example">
+      <h3>The Box Model: Movie Screen</h3>
+      <div class="boxmodel-demo">
+        <div class="boxmodel-box" style="position:relative;">
+          Movie Screen
+          <span class="boxmodel-label">padding, border, margin</span>
+        </div>
+      </div>
+      <div style="font-size:0.98rem;color:#444;">Every element is a box—like a movie screen! Mastering the box model helps you control layout and spacing for a blockbuster site.</div>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Summer Movie Guide. All rights reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POUR Dining - Bar & Lounge</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      line-height: 1.7;
+      color: #222;
+      background: #fff;
+      padding-top: 90px;
+      letter-spacing: 0.01em;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      z-index: 1000;
+      padding: 28px 0 22px 0;
+      border-bottom: 1px solid #f2f2f2;
+      transition: box-shadow 0.3s;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #222;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 48px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #bfa14a;
+      border-bottom: 2px solid #bfa14a;
+    }
+    .hero-bar {
+      height: 60vh;
+      min-height: 420px;
+      background: linear-gradient(rgba(30,30,30,0.38), rgba(30,30,30,0.38)),
+        url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+      animation: fadeInHero 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeInHero {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: none; }
+    }
+    .hero-bar-content {
+      background: rgba(30,30,30,0.38);
+      padding: 56px 72px 56px 56px;
+      border-radius: 18px;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      animation: fadeInHero 1.6s 0.2s cubic-bezier(.4,0,.2,1) backwards;
+    }
+    .hero-bar-content h1 {
+      font-size: 54px;
+      font-weight: 400;
+      margin-bottom: 22px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-bar-content p {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 0;
+      color: #f7f7f7;
+    }
+    .bar-section {
+      max-width: 1100px;
+      margin: 70px auto;
+      padding: 0 48px;
+    }
+    .bar-section h2 {
+      font-size: 34px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      letter-spacing: 0.08em;
+      color: #222;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
+    .bar-section h2::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 4px;
+      background: #bfa14a;
+      border-radius: 2px;
+      margin: 14px auto 0 auto;
+    }
+    .bar-section p {
+      font-size: 19px;
+      color: #444;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+    .bar-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin: 48px 0;
+    }
+    .bar-gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      height: 260px;
+      object-fit: cover;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .bar-gallery img:hover {
+      transform: scale(1.045);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+    }
+    .cocktail-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      margin: 48px 0 0 0;
+    }
+    .cocktail-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      padding: 36px 28px;
+      flex: 1 1 260px;
+      min-width: 260px;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.25s, transform 0.25s;
+      border: 1px solid #f2f2f2;
+    }
+    .cocktail-card:hover {
+      box-shadow: 0 8px 32px rgba(191,161,74,0.13);
+      transform: translateY(-6px) scale(1.025);
+      border-color: #bfa14a33;
+    }
+    .cocktail-card h3 {
+      font-size: 23px;
+      margin-bottom: 12px;
+      color: #bfa14a;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .cocktail-card p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+    .bar-note {
+      background: #f8f6ef;
+      border-left: 5px solid #bfa14a;
+      padding: 26px 34px;
+      margin: 48px 0 0 0;
+      font-size: 18px;
+      color: #444;
+      border-radius: 10px;
+      font-weight: 400;
+    }
+    .section-button {
+      background: linear-gradient(90deg, #bfa14a 0%, #e6d8a7 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 16px 44px;
+      border-radius: 30px;
+      border: none;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      box-shadow: 0 2px 16px rgba(191,161,74,0.10);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: 18px;
+      display: inline-block;
+    }
+    .section-button:hover {
+      background: linear-gradient(90deg, #a88c2c 0%, #bfa14a 100%);
+      color: #fffbe6;
+      box-shadow: 0 8px 32px rgba(191,161,74,0.18);
+    }
+    @media (max-width: 900px) {
+      .hero-bar-content { padding: 36px 18px 36px 18px; }
+      .bar-section { padding: 0 12px; }
+      .nav-container { padding: 0 12px; }
+    }
+    @media (max-width: 600px) {
+      .hero-bar { height: 38vh; min-height: 220px; }
+      .hero-bar-content { max-width: 100%; padding: 18px 6px; }
+      .bar-section h2 { font-size: 22px; }
+      .bar-section { margin: 36px auto; }
+      .cocktail-list { gap: 16px; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="buggy.html" class="logo">POUR DINING</a>
+      <ul class="nav-links">
+        <li><a href="buggy.html">About</a></li>
+        <li><a href="buggy.html#restaurant">Restaurant</a></li>
+        <li><a href="bar.html">Bar & Lounge</a></li>
+        <li><a href="buggy.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reservation.html">Make a Reservation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bar">
+    <div class="hero-bar-content">
+      <h1>Bar & Lounge</h1>
+      <p>
+        The bar at POUR Dining is the party you'll want to return to night after night.<br>
+        Our cocktail menu highlights a mix of NYC classics and innovative newcomers, alongside our deep collection of international wines and spirits featuring producers from around the globe.
+      </p>
+    </div>
+  </section>
+
+  <section class="bar-section">
+    <h2>Signature Cocktails & Spirits</h2>
+    <p>
+      Our award-winning bar program features a curated selection of classic and contemporary cocktails, rare spirits, and a wine list recognized among the best in New York. Whether you're seeking a perfectly balanced Manhattan, a creative seasonal spritz, or a glass of Champagne to toast the skyline, our bartenders are ready to craft your perfect drink.
+    </p>
+    <div class="cocktail-list">
+      <div class="cocktail-card">
+        <h3>Skyline Manhattan</h3>
+        <p>Rye whiskey, sweet vermouth, house bitters, orange twist</p>
+      </div>
+      <div class="cocktail-card">
+        <h3>Liberty Spritz</h3>
+        <p>Gin, elderflower, prosecco, grapefruit, fresh mint</p>
+      </div>
+      <div class="cocktail-card">
+        <h3>Barrel-Aged Negroni</h3>
+        <p>Barrel-aged gin, Campari, sweet vermouth, orange</p>
+      </div>
+      <div class="cocktail-card">
+        <h3>Seasonal Mocktail</h3>
+        <p>Fresh fruit, herbs, citrus, sparkling water</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bar-section">
+    <h2>Atmosphere & Experience</h2>
+    <p>
+      Our lounge offers panoramic city views, plush seating, and a vibrant yet relaxed ambiance. Whether you're meeting friends for after-work drinks, enjoying a romantic date, or celebrating a special occasion, the Bar & Lounge at POUR Dining is the perfect destination.
+    </p>
+    <div class="bar-gallery">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Bar Interior" />
+      <img src="https://images.unsplash.com/photo-1514361892635-cebb9b6c7ca5?auto=format&fit=crop&w=800&q=80" alt="Cocktail Glasses" />
+      <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="City View from Bar" />
+    </div>
+    <div class="bar-note">
+      <strong>Walk-ins are welcome!</strong> Reservations are not required for the bar and lounge, but are recommended for large groups and special occasions.
+    </div>
+  </section>
+
+  <section class="bar-section">
+    <h2>Wine & Spirits</h2>
+    <p>
+      Explore our extensive wine cellar and rare spirits collection, featuring producers from around the world. Our sommeliers and bartenders are happy to recommend the perfect pairing for your evening.
+    </p>
+  </section>
+
+  <section class="bar-section" style="text-align:center;">
+    <h2>Join Us Tonight</h2>
+    <p style="font-size:18px; color:#333;">
+      The Bar & Lounge at POUR Dining is open Tuesday through Sunday, 5:00 PM – Midnight.<br>
+      <span style="color:#888;">28 High End Avenue, 60th Floor, New York, NY 10005</span>
+    </p>
+    <a href="reservation.html" class="section-button" style="display:inline-block; margin-top:20px;">Reserve a Table</a>
+  </section>
+</body>
+</html>

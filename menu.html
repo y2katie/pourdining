@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POUR Dining - Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+      padding-top: 80px; /* Add padding for fixed navigation */
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #666;
+    }
+
+    /* Header */
+    .menu-header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 40px;
+    }
+
+    .menu-header h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .menu-header p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Menu Sections */
+    .menu-section {
+      padding: 60px 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .menu-section:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #333;
+    }
+
+    .menu-grid {
+      display: grid;
+      gap: 40px;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info h3 {
+      font-size: 24px;
+      font-weight: 300;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .item-description {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .item-price {
+      font-size: 20px;
+      font-weight: 300;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    /* Special Items */
+    .special-item {
+      background: #fff;
+      padding: 30px;
+      border: 2px solid #333;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .special-item h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .special-item p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .special-price {
+      font-size: 24px;
+      font-weight: 300;
+      color: #333;
+    }
+
+    /* WCAG Error Styles */
+    .low-contrast { color: #bdbdbd; background: #f5f5f5; }
+    .tiny-text { font-size: 10px; }
+    .no-alt { border: 2px solid #e53e3e; }
+    .bad-focus:focus { outline: none; }
+    .no-label { border: 2px dashed #f59e42; }
+    .keyboard-trap { pointer-events: none; }
+
+    /* Footer */
+    .menu-footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .menu-footer p {
+      margin-bottom: 20px;
+    }
+
+    .close-button {
+      display: inline-block;
+      padding: 12px 30px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+      background: white;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .item-price {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">POUR DINING</div>
+      <ul class="nav-links">
+        <li><a href="buggy.html">About</a></li>
+        <li><a href="buggy.html#restaurant">Restaurant</a></li>
+        <li><a href="bar.html">Bar & Lounge</a></li>
+        <li><a href="buggy.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reservation.html">Make a Reservation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Menu Header -->
+  <header class="menu-header">
+    <h1 class="low-contrast">POUR Dining Menu</h1>
+    <p class="tiny-text">Experience our seasonal offerings, carefully crafted to demonstrate both culinary excellence and accessibility challenges. Each dish is paired with a lesson in inclusive design.</p>
+  </header>
+
+  <!-- Appetizers -->
+  <section class="menu-section">
+    <h2 class="section-title">Appetizers</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>WCAG Awareness Salad</h3>
+          <p class="item-description">Fresh greens with intentionally low-contrast dressing. Served with missing ingredient labels to demonstrate the importance of clear information.</p>
+        </div>
+        <div class="item-price">$18</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Keyboard Trap Crostini</h3>
+          <p class="item-description">Artisan bread with goat cheese and honey. The plate is designed to be difficult to navigate with assistive technology.</p>
+        </div>
+        <div class="item-price">$16</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Focus Indicator Soup</h3>
+          <p class="item-description">Creamy tomato bisque with croutons. The bowl has no visual focus indicators, making it challenging for keyboard users.</p>
+        </div>
+        <div class="item-price">$14</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Courses -->
+  <section class="menu-section">
+    <h2 class="section-title">Main Courses</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Perceivable Pasta</h3>
+          <p class="item-description">Handmade tagliatelle with wild mushrooms and truffle. The dish is intentionally difficult to perceive for users with visual impairments.</p>
+        </div>
+        <div class="item-price">$32</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Operable Salmon</h3>
+          <p class="item-description">Atlantic salmon with seasonal vegetables. The presentation makes it challenging to operate with assistive devices.</p>
+        </div>
+        <div class="item-price">$38</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Understandable Risotto</h3>
+          <p class="item-description">Arborio rice with saffron and parmesan. The dish description is intentionally confusing and unclear.</p>
+        </div>
+        <div class="item-price">$28</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Robust Ribeye</h3>
+          <p class="item-description">Prime beef with roasted potatoes. The dish is not robust enough to work with various assistive technologies.</p>
+        </div>
+        <div class="item-price">$45</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chef's Special -->
+  <section class="menu-section">
+    <div class="special-item">
+      <h3>Accessibility Workshop Platter</h3>
+      <p>Our signature dish that combines all four WCAG principles in one educational experience. Perfect for groups learning about inclusive design.</p>
+      <div class="special-price">$65 per person</div>
+    </div>
+  </section>
+
+  <!-- Desserts -->
+  <section class="menu-section">
+    <h2 class="section-title">Desserts</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Alt Text Tiramisu</h3>
+          <p class="item-description">Classic Italian dessert with missing alternative text. The presentation lacks proper descriptions for screen readers.</p>
+        </div>
+        <div class="item-price">$12</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Color Contrast Cake</h3>
+          <p class="item-description">Chocolate layer cake with intentionally poor color contrast. Demonstrates the importance of accessible color choices.</p>
+        </div>
+        <div class="item-price">$14</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beverages -->
+  <section class="menu-section">
+    <h2 class="section-title">Beverages</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Semantic Structure Soda</h3>
+          <p class="item-description">House-made craft soda with poor semantic structure. The drink lacks proper headings and organization.</p>
+        </div>
+        <div class="item-price">$8</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>ARIA Labels Latte</h3>
+          <p class="item-description">Artisan coffee with missing ARIA labels. The cup design doesn't provide proper accessibility information.</p>
+        </div>
+        <div class="item-price">$6</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Screen Reader Wine</h3>
+          <p class="item-description">Curated wine selection with poor screen reader compatibility. The wine list lacks proper markup for assistive technology.</p>
+        </div>
+        <div class="item-price">$15</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="menu-footer">
+    <p>All dishes are prepared with the same attention to accessibility education as they are to culinary excellence.</p>
+    <p>Prices subject to change. Please inform us of any dietary restrictions or accessibility needs.</p>
+    <a href="#" class="close-button bad-focus" onclick="window.close()">Close Menu</a>
+  </footer>
+</body>
+</html> 

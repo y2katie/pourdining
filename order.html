@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POUR Dining - Order Online</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+      padding-top: 80px; /* Add padding for fixed navigation */
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #666;
+    }
+
+    /* Header */
+    .order-header {
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                  url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .order-header h1 {
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .order-header p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Main Container */
+    .order-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    /* Menu Section */
+    .menu-section {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #333;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 20px;
+      align-items: center;
+      padding: 25px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info h3 {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .item-description {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .item-price {
+      font-size: 18px;
+      font-weight: 300;
+      color: #333;
+      text-align: right;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-btn {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #ddd;
+      background: white;
+      color: #333;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .quantity-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .quantity-display {
+      width: 50px;
+      height: 35px;
+      border: 1px solid #ddd;
+      text-align: center;
+      line-height: 35px;
+      background: white;
+      border-radius: 4px;
+    }
+
+    /* Cart Section */
+    .cart-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .cart-title {
+      font-size: 24px;
+      font-weight: 300;
+      margin-bottom: 25px;
+      color: #333;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-info h4 {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .cart-total {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 2px solid #eee;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .total-line.final {
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+
+    /* Form Section */
+    .form-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 400;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #333;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      font-family: inherit;
+      background: white;
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: #555;
+    }
+
+    /* WCAG Error Styles */
+    .low-contrast { color: #bdbdbd; background: #f5f5f5; }
+    .tiny-text { font-size: 10px; }
+    .no-alt { border: 2px solid #e53e3e; }
+    .bad-focus:focus { outline: none; }
+    .no-label { border: 2px dashed #f59e42; }
+    .keyboard-trap { pointer-events: none; }
+
+    /* Footer */
+    .order-footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .order-footer p {
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .close-button {
+      display: inline-block;
+      padding: 10px 25px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+
+    .close-button:hover {
+      background: white;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .order-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .menu-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .quantity-controls {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">POUR DINING</div>
+      <ul class="nav-links">
+        <li><a href="buggy.html">About</a></li>
+        <li><a href="buggy.html#restaurant">Restaurant</a></li>
+        <li><a href="bar.html">Bar & Lounge</a></li>
+        <li><a href="buggy.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reservation.html">Make a Reservation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Order Header -->
+  <header class="order-header">
+    <h1 class="low-contrast">Order Online</h1>
+    <p class="tiny-text">Experience our exquisite cuisine with convenient online ordering. Each dish is crafted with the same attention to accessibility education as culinary excellence.</p>
+  </header>
+
+  <div class="order-container">
+    <!-- Menu Section -->
+    <div class="menu-section">
+      <h2 class="section-title">Today's Menu</h2>
+      
+      <!-- Appetizers -->
+      <h3 style="font-size: 22px; margin: 30px 0 20px; color: #333;">Appetizers</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>WCAG Awareness Salad</h3>
+          <p class="item-description">Fresh mixed greens with intentionally low-contrast dressing, served with missing ingredient labels</p>
+        </div>
+        <div class="item-price">$18</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('salad', -1)">-</button>
+          <div class="quantity-display" id="salad-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('salad', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Keyboard Trap Crostini</h3>
+          <p class="item-description">Artisan bread with goat cheese and honey, designed to be difficult to navigate</p>
+        </div>
+        <div class="item-price">$16</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('crostini', -1)">-</button>
+          <div class="quantity-display" id="crostini-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('crostini', 1)">+</button>
+        </div>
+      </div>
+
+      <!-- Main Courses -->
+      <h3 style="font-size: 22px; margin: 30px 0 20px; color: #333;">Main Courses</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Perceivable Pasta</h3>
+          <p class="item-description">Handmade tagliatelle with wild mushrooms and truffle, difficult to perceive</p>
+        </div>
+        <div class="item-price">$32</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('pasta', -1)">-</button>
+          <div class="quantity-display" id="pasta-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('pasta', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Operable Salmon</h3>
+          <p class="item-description">Atlantic salmon with seasonal vegetables, challenging to operate</p>
+        </div>
+        <div class="item-price">$38</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('salmon', -1)">-</button>
+          <div class="quantity-display" id="salmon-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('salmon', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Understandable Risotto</h3>
+          <p class="item-description">Arborio rice with saffron and parmesan, intentionally confusing</p>
+        </div>
+        <div class="item-price">$28</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('risotto', -1)">-</button>
+          <div class="quantity-display" id="risotto-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('risotto', 1)">+</button>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <h3 style="font-size: 22px; margin: 30px 0 20px; color: #333;">Desserts</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Alt Text Tiramisu</h3>
+          <p class="item-description">Classic Italian dessert with missing alternative text descriptions</p>
+        </div>
+        <div class="item-price">$12</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('tiramisu', -1)">-</button>
+          <div class="quantity-display" id="tiramisu-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('tiramisu', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-info">
+          <h3>Color Contrast Cake</h3>
+          <p class="item-description">Chocolate layer cake with intentionally poor color contrast</p>
+        </div>
+        <div class="item-price">$14</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="updateQuantity('cake', -1)">-</button>
+          <div class="quantity-display" id="cake-qty">0</div>
+          <button class="quantity-btn" onclick="updateQuantity('cake', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart-section">
+      <h2 class="cart-title">Your Order</h2>
+      <div id="cart-items">
+        <p style="color: #666; text-align: center; font-style: italic;">No items selected</p>
+      </div>
+      <div class="cart-total">
+        <div class="total-line">
+          <span>Subtotal:</span>
+          <span id="subtotal">$0.00</span>
+        </div>
+        <div class="total-line">
+          <span>Tax (8.875%):</span>
+          <span id="tax">$0.00</span>
+        </div>
+        <div class="total-line">
+          <span>Service Fee:</span>
+          <span id="service-fee">$0.00</span>
+        </div>
+        <div class="total-line final">
+          <span>Total:</span>
+          <span id="total">$0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-container" style="grid-template-columns: 1fr;">
+    <div class="form-section">
+      <h2 class="section-title">Order Details</h2>
+      <form id="order-form">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" class="form-input no-label" required />
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email Address" class="form-input no-label" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Phone Number" class="form-input no-label" required />
+        </div>
+        <div class="form-group">
+          <select class="form-select no-label" required>
+            <option value="">Select Pickup Time</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="90">1.5 hours</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Special Instructions or Accessibility Requests" class="form-textarea no-label"></textarea>
+        </div>
+        <button type="submit" class="submit-btn bad-focus keyboard-trap">Place Order</button>
+      </form>
+      <p style="text-align: center; margin-top: 20px; font-style: italic; color: #666; font-size: 14px;">This form intentionally contains accessibility issues for educational purposes.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="order-footer">
+    <p>All orders are prepared with the same attention to accessibility education as culinary excellence.</p>
+    <p>For questions about our accessibility features, please call (555) 123-4567</p>
+    <a href="#" class="close-button bad-focus" onclick="window.close()">Close Order Page</a>
+  </footer>
+
+  <script>
+    const menuItems = {
+      salad: { name: 'WCAG Awareness Salad', price: 18 },
+      crostini: { name: 'Keyboard Trap Crostini', price: 16 },
+      pasta: { name: 'Perceivable Pasta', price: 32 },
+      salmon: { name: 'Operable Salmon', price: 38 },
+      risotto: { name: 'Understandable Risotto', price: 28 },
+      tiramisu: { name: 'Alt Text Tiramisu', price: 12 },
+      cake: { name: 'Color Contrast Cake', price: 14 }
+    };
+
+    const quantities = {};
+
+    function updateQuantity(item, change) {
+      if (!quantities[item]) quantities[item] = 0;
+      quantities[item] = Math.max(0, quantities[item] + change);
+      
+      document.getElementById(`${item}-qty`).textContent = quantities[item];
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      let subtotal = 0;
+      let cartHTML = '';
+
+      for (const [item, qty] of Object.entries(quantities)) {
+        if (qty > 0) {
+          const itemTotal = menuItems[item].price * qty;
+          subtotal += itemTotal;
+          cartHTML += `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <h4>${menuItems[item].name}</h4>
+                <span>Qty: ${qty}</span>
+              </div>
+              <div class="cart-item-price">$${itemTotal.toFixed(2)}</div>
+            </div>
+          `;
+        }
+      }
+
+      if (cartHTML === '') {
+        cartHTML = '<p style="color: #666; text-align: center; font-style: italic;">No items selected</p>';
+      }
+
+      cartItems.innerHTML = cartHTML;
+
+      const tax = subtotal * 0.08875;
+      const serviceFee = subtotal * 0.05;
+      const total = subtotal + tax + serviceFee;
+
+      document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('service-fee').textContent = `$${serviceFee.toFixed(2)}`;
+      document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Order submitted! This form demonstrates accessibility challenges for educational purposes.');
+    });
+  </script>
+</body>
+</html> 

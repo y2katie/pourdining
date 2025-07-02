@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POUR Dining - Gallery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+      padding-top: 80px; /* Add padding for fixed navigation */
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #666;
+    }
+
+    /* Header */
+    .gallery-header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 40px;
+    }
+
+    .gallery-header h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .gallery-header p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Gallery Grid */
+    .gallery-section {
+      padding: 80px 40px;
+      background: white;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 50px;
+      letter-spacing: 1px;
+      color: #333;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-item.nyc-view {
+      background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.dining-room {
+      background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.event-space {
+      background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.kitchen {
+      background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.bar-lounge {
+      background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.cityscape {
+      background-image: url('https://images.unsplash.com/photo-1502602898535-0b4c0b0b0b0b?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.chef-table {
+      background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-item.wine-cellar {
+      background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80');
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 30px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .gallery-overlay h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .gallery-overlay p {
+      font-size: 16px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    /* Description Section */
+    .description-section {
+      padding: 60px 40px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .description-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .description-content h2 {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      color: #333;
+    }
+
+    .description-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* WCAG Error Styles */
+    .low-contrast { color: #bdbdbd; background: #f5f5f5; }
+    .tiny-text { font-size: 10px; }
+    .no-alt { border: 2px solid #e53e3e; }
+    .bad-focus:focus { outline: none; }
+    .no-label { border: 2px dashed #f59e42; }
+    .keyboard-trap { pointer-events: none; }
+
+    /* Footer */
+    .gallery-footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .gallery-footer p {
+      margin-bottom: 20px;
+    }
+
+    .close-button {
+      display: inline-block;
+      padding: 12px 30px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+      background: white;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .gallery-item {
+        height: 300px;
+      }
+      
+      .gallery-header h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">POUR DINING</div>
+      <ul class="nav-links">
+        <li><a href="buggy.html">About</a></li>
+        <li><a href="buggy.html#restaurant">Restaurant</a></li>
+        <li><a href="bar.html">Bar & Lounge</a></li>
+        <li><a href="buggy.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reservation.html">Make a Reservation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Gallery Header -->
+  <header class="gallery-header">
+    <h1 class="low-contrast">POUR Dining Gallery</h1>
+    <p class="tiny-text">Explore our stunning spaces and discover how each area demonstrates accessibility challenges while providing an exceptional dining experience.</p>
+  </header>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <h2 class="gallery-title">Our Spaces</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item nyc-view no-alt">
+        <div class="gallery-overlay">
+          <h3>City Views</h3>
+          <p>Stunning New York skyline from our elevated location. Experience the breathtaking vistas that make every visit memorable.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item dining-room no-alt">
+        <div class="gallery-overlay">
+          <h3>Main Dining Room</h3>
+          <p>Elegant space for intimate dinners and celebrations. Our sophisticated atmosphere combines luxury with accessibility education.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item event-space no-alt">
+        <div class="gallery-overlay">
+          <h3>Event Space</h3>
+          <p>Flexible venue for weddings and corporate events. Perfect for groups looking to celebrate while learning about inclusive design.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item kitchen no-alt">
+        <div class="gallery-overlay">
+          <h3>Chef's Kitchen</h3>
+          <p>Where culinary magic meets accessibility innovation. Watch our chefs create dishes while demonstrating inclusive design principles.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item bar-lounge no-alt">
+        <div class="gallery-overlay">
+          <h3>Bar & Lounge</h3>
+          <p>Sophisticated atmosphere for cocktails and conversation. Our bar area showcases both mixology excellence and accessibility challenges.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item cityscape no-alt">
+        <div class="gallery-overlay">
+          <h3>Sunset Views</h3>
+          <p>Breathtaking evening vistas of the city. Experience the magic of New York as the sun sets over the skyline.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item chef-table no-alt">
+        <div class="gallery-overlay">
+          <h3>Chef's Table</h3>
+          <p>Intimate dining experience with front-row seats to culinary artistry. Perfect for accessibility workshops and demonstrations.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item wine-cellar no-alt">
+        <div class="gallery-overlay">
+          <h3>Wine Cellar</h3>
+          <p>Curated collection of international wines and spirits. Our sommelier guides you through selections while highlighting accessibility features.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description Section -->
+  <section class="description-section">
+    <div class="description-content">
+      <h2>Accessibility in Every Space</h2>
+      <p>Each area of POUR Dining is thoughtfully designed to demonstrate real-world accessibility challenges while maintaining the highest standards of luxury dining. From our intentionally low-contrast signage to our keyboard-trap reservation system, every element serves as a teaching moment.</p>
+      <p>Our gallery showcases not just beautiful spaces, but opportunities to learn about inclusive design. Whether you're a web developer, designer, or simply someone interested in accessibility, our restaurant provides hands-on experience with the challenges faced by users with disabilities.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="gallery-footer">
+    <p>All images demonstrate accessibility challenges for educational purposes.</p>
+    <p>Contact us to schedule a guided tour of our accessibility features.</p>
+    <a href="#" class="close-button bad-focus" onclick="window.close()">Close Gallery</a>
+  </footer>
+</body>
+</html> 
