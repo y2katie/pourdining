@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POUR Dining - Restaurant</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: #222;
+      background: #fff;
+      padding-top: 80px;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #333;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #bfa14a;
+    }
+    /* Hero Section */
+    .hero-restaurant {
+      height: 60vh;
+      min-height: 340px;
+      background: linear-gradient(rgba(30,30,30,0.38), rgba(30,30,30,0.38)),
+        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+      text-align: center;
+    }
+    .hero-restaurant-content {
+      background: rgba(30,30,30,0.38);
+      padding: 48px 60px;
+      border-radius: 16px;
+      max-width: 700px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .hero-restaurant-content h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-restaurant-content p {
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 0;
+      color: #f7f7f7;
+    }
+    /* Section Styles */
+    .restaurant-section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+    .restaurant-section h2 {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      color: #222;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
+    .restaurant-section h2::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 4px;
+      background: #bfa14a;
+      border-radius: 2px;
+      margin: 14px auto 0 auto;
+    }
+    .restaurant-section p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 24px;
+    }
+    .restaurant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .restaurant-image {
+      width: 100%;
+      height: 340px;
+      background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+    /* Menu Cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      margin: 40px 0;
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 28px 22px;
+      text-align: left;
+      border-left: 5px solid #bfa14a;
+    }
+    .menu-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #bfa14a;
+      font-weight: 400;
+    }
+    .menu-card p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 0;
+    }
+    /* Private Dining */
+    .private-dining-section {
+      background: #f9f9f9;
+      padding: 60px 0;
+      text-align: center;
+    }
+    .private-dining-section h2 {
+      color: #222;
+      font-size: 28px;
+      font-weight: 300;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .private-dining-section p {
+      color: #555;
+      font-size: 17px;
+      margin-bottom: 24px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-button {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid #bfa14a;
+      color: #bfa14a;
+      text-decoration: none;
+      font-size: 16px;
+      letter-spacing: 1px;
+      border-radius: 24px;
+      font-weight: 600;
+      background: white;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .section-button:hover {
+      background: #bfa14a;
+      color: white;
+    }
+    @media (max-width: 900px) {
+      .hero-restaurant-content { padding: 24px 10px; }
+      .restaurant-section { padding: 0 10px; }
+      .nav-container { padding: 0 10px; }
+      .restaurant-grid { grid-template-columns: 1fr; gap: 24px; }
+      .restaurant-image { height: 220px; }
+    }
+    @media (max-width: 600px) {
+      .hero-restaurant { height: 32vh; min-height: 120px; }
+      .hero-restaurant-content { max-width: 100%; padding: 10px 2px; }
+      .restaurant-section h2 { font-size: 18px; }
+      .restaurant-section { margin: 24px auto; }
+      .menu-grid { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">POUR DINING</a>
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="restaurant.html">Restaurant</a></li>
+        <li><a href="bar.html">Bar & Lounge</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reservation.html">Make a Reservation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-restaurant">
+    <div class="hero-restaurant-content" style="background:rgba(30,30,30,0.38);">
+      <h1>Our Restaurant</h1>
+      <p>Modern New York dining, where tradition meets contemporary creativity. Enjoy panoramic city views, an ever-evolving menu, and a warm, elegant atmosphere at POUR Dining.</p>
+    </div>
+  </section>
+
+  <!-- About Restaurant Section -->
+  <section class="restaurant-section">
+    <div class="restaurant-grid">
+      <div>
+        <h2>Experience POUR</h2>
+        <p>Helmed by our award-winning chef, POUR Dining's seasonal menu celebrates the best of local ingredients and global inspiration. Our dining room offers a refined yet welcoming ambiance, perfect for intimate dinners, business gatherings, or special occasions.</p>
+        <a href="reservation.html" class="section-button">Reserve a Table</a>
+      </div>
+      <div class="restaurant-image"></div>
+    </div>
+  </section>
+
+  <!-- Seasonal Menu Section -->
+  <section class="restaurant-section">
+    <h2>Seasonal Menu Highlights</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Hudson Valley Duck</h3>
+        <p>Roasted breast, confit leg, cherry gastrique, charred spring onion</p>
+      </div>
+      <div class="menu-card">
+        <h3>Spring Pea Risotto</h3>
+        <p>Creamy carnaroli rice, fresh peas, mint, lemon zest, parmesan</p>
+      </div>
+      <div class="menu-card">
+        <h3>Atlantic Halibut</h3>
+        <p>Pan-seared, asparagus, morel mushrooms, Meyer lemon beurre blanc</p>
+      </div>
+      <div class="menu-card">
+        <h3>Chocolate Hazelnut Torte</h3>
+        <p>Dark chocolate, toasted hazelnuts, salted caramel, crème fraîche</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Private Dining & Events Section -->
+  <section class="private-dining-section">
+    <h2>Private Dining & Events</h2>
+    <p>POUR Dining is available for private events, intimate dinners, and celebrations. Our flexible spaces and dedicated team ensure a memorable experience for every occasion. Contact us to learn more about our private dining options.</p>
+    <a href="reservation.html" class="section-button">Inquire Now</a>
+  </section>
+</body>
+</html> 
